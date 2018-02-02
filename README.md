@@ -1,27 +1,100 @@
-# Ng4Calendar
+# Ng4Spinner
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.6.
+The Ng4Spinner allows you to show and hide your customized loader ,  according to your requirement and design.
+Include the HTML in the landing component and can control show and hide from any  components in the respective module.
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Working Stackblitz Example
 
-## Code scaffolding
+Try on StackBLitz first
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+ [Open StackBltz ]( https://stackblitz.com/edit/ng4-spinner?file=app/hello.component.ts)
 
-## Build
+## Installation
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Install npm module:
+    
+    `npm install ng4-spinner --save` 
 
-## Running unit tests
+## Usage
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Import `Ng4SpinnerModule` from  node_modules/ng4-spinner in your app and start using a component
 
-## Running end-to-end tests
+Add the following html code in your application landing component, generally app-component 
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+```html
+<ng4-spinner>
+// create you own spinner or loader according to your design
+// Your spinner or Loader will go here
+</ng4-spinner>
+```
 
-## Further help
+Import `Ng4SpinnerService` from  node_modules/ng4-spinner  in any of the component you would like to start the Spinner/loader
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+    The service has two methods 
+
+```typescript
+     show() //to enable or show the SPINNER
+```
+```typescript
+      hide() //to disable or hide the SPINNER
+```
+
+
+
+#Sample
+
+
+
+app.module.ts
+
+```typescript
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { AppComponent } from './app.component';
+
+/// import your Spinner module
+import {Ng4SpinnerModule} from './../../node_modules/ng4-spinner';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    Ng4SpinnerModule// add it to the imports
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+app.component.html
+
+```html
+<ng4-spinner>
+    My own Spinner
+</ng4-spinner>
+```
+
+app.component.ts
+
+```typescript
+import { Component } from '@angular/core';
+import {Ng4SpinnerService} from './../../node_modules/ng4-spinner'
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html'
+})
+export class AppComponent {
+  title = 'app';
+  constructor(private ngSpinner:Ng4SpinnerService){
+    ngSpinner.show();
+ /// to show the spinner
+
+
+ ngSpinner.hide()
+ //to hide the spinner
+  }
+}
+```
